@@ -6,8 +6,9 @@ export type CartItemType = {
     price: number, 
     qty: number, 
 }
+// Define the custom type for the shopping cart state
 type CartStateType = { cart: CartItemType[]}
-
+// Initialize the shopping cart state 
 const initCartState: CartStateType = { cart: []}
 
 const REDUCER_ACTION_TYPE = {
@@ -95,9 +96,9 @@ const reducer = (state: CartStateType, action: ReducerAction): CartStateType => 
               return {dispacth, REDUCER_ACTIONS, totalItems, totalPrice, cart}
 
     }
-
+    // Defining the custom Type 
     export type UseCartContextType = ReturnType<typeof useCartContext>
-
+    // Initializing the context state with the custom type
     const initCartContextState : UseCartContextType = {
         dispacth:() => {}, 
         REDUCER_ACTIONS: REDUCER_ACTION_TYPE, 
@@ -105,17 +106,17 @@ const reducer = (state: CartStateType, action: ReducerAction): CartStateType => 
         totalPrice: '',
         cart: [], 
     }
-
-export const CarContext = createContext<UseCartContextType>(initCartContextState)
+// Creating the context 
+export const CartContext = createContext<UseCartContextType>(initCartContextState)
 
 type ChildrenType = {
     children?: ReactElement | ReactElement[]
 }
 export const cartProvider = ({children}: ChildrenType ): ReactElement => {
     return (
-        <CarContext.Provider value ={useCartContext(initCartState)}>
+        <CartContext.Provider value ={useCartContext(initCartState)}>
             {children}
-        </CarContext.Provider>
+        </CartContext.Provider>
     )
 }
-export default CarContext
+export default CartContext
